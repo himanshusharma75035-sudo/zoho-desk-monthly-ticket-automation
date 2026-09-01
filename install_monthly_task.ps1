@@ -64,7 +64,7 @@ Add-MonthlyTrigger -Task $task -DayOfMonth 7 -Time $SeventhDayTime
 
 $action = $task.Actions.Create(0)
 $action.Path = "powershell.exe"
-$action.Arguments = "-NoProfile -ExecutionPolicy Bypass -File `"$TaskRunner`""
+$action.Arguments = "-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File `"$TaskRunner`""
 $action.WorkingDirectory = $ScriptDir
 
 $null = $rootFolder.RegisterTaskDefinition($TaskName, $task, 6, $null, $null, 3)
