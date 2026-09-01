@@ -1,0 +1,41 @@
+{
+  "tickets": [
+    {
+      "ticket_key": "monthly-reconciliation",
+      "run_day_of_month": 1,
+      "subject_template": "Monthly reconciliation pack for {last_month_name} {last_month_year}",
+      "departmentId": "replace_with_department_id",
+      "contactId": "replace_with_contact_id",
+      "assigneeId": "replace_with_agent_id",
+      "priority": "High",
+      "description_template": "Please prepare the reconciliation pack for {last_month_name} {last_month_year}. Target date: {tat_date}.",
+      "tat_day_of_current_month": 2,
+      "cf": {
+        "cf_tat_date": "{tat_date}",
+        "cf_period": "{last_month_name} {last_month_year}"
+      }
+    },
+    {
+      "ticket_key": "tax-invoice-data",
+      "run_day_of_month": 3,
+      "subject_template": "Tax invoice data for {last_month_name} {last_month_year}",
+      "departmentId": "replace_with_department_id",
+      "email": "requester@example.com",
+      "assigneeId": "replace_with_agent_id",
+      "priority": "Medium",
+      "description_template": "Please share tax invoice data for {last_month_name} {last_month_year}. Target date: {tat_date}.",
+      "tat_day_of_current_month": 3
+    },
+    {
+      "ticket_key": "settlement-data",
+      "run_day_of_month": 7,
+      "subject_template": "Settlement data for {last_month_name}-{last_month_year_short}",
+      "departmentId": "replace_with_department_id",
+      "contactId": "replace_with_contact_id",
+      "assigneeId": "replace_with_agent_id",
+      "priority": "Medium",
+      "description_template": "Please provide settlement data for {last_month_name}-{last_month_year_short}."
+    }
+  ]
+}
+

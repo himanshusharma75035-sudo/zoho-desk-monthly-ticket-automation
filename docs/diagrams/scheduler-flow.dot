@@ -1,0 +1,19 @@
+digraph scheduler_flow {
+  rankdir=LR;
+  node [shape=box, style="rounded,filled", fillcolor="#f8fafc", color="#334155", fontname="Arial"];
+  edge [color="#475569", fontname="Arial"];
+
+  start [label="Monthly trigger fires"];
+  runner [label="run_zoho_monthly_tickets.ps1"];
+  env [label="Load .env"];
+  config [label="Load tickets.config.json"];
+  due [label="Select due tickets\nrun_day <= today"];
+  state [label="Skip tickets already in state"];
+  create [label="Create Zoho Desk tickets"];
+  notify [label="Send Telegram summary"];
+  finish [label="Exit 0 and write logs"];
+
+  start -> runner -> env -> config -> due -> state -> create -> notify -> finish;
+  state -> finish [label="nothing due / already done"];
+}
+

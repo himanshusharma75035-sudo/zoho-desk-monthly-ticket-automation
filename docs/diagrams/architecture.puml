@@ -1,0 +1,24 @@
+@startuml
+title Zoho Desk Monthly Ticket Automation - Architecture
+
+actor "Windows Task Scheduler" as Scheduler
+rectangle "PowerShell Runner" as Runner
+rectangle "Python Automation" as Python
+database "State File\n.zoho_monthly_tickets_state.json" as State
+file "Ticket Config\ntickets.config.json" as Config
+cloud "Zoho Accounts\nOAuth Refresh" as Accounts
+cloud "Zoho Desk API\nTicket Create" as Desk
+cloud "Telegram Bot API\nNotification" as Telegram
+
+Scheduler --> Runner : monthly trigger
+Runner --> Python : python zoho_monthly_tickets.py
+Python --> Config : read due ticket templates
+Python --> State : check duplicate status
+Python --> Accounts : exchange refresh token
+Accounts --> Python : access token
+Python --> Desk : create due tickets
+Python --> State : record created tickets
+Python --> Telegram : send summary
+
+@enduml
+

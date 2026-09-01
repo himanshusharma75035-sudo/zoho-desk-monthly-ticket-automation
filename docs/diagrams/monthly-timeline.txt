@@ -1,0 +1,11 @@
+Monthly schedule
+
+Day 1  11:00  [first monthly ticket group]  -> state written -> Telegram summary
+Day 3  10:00  [third-day ticket group]      -> state written -> Telegram summary
+Day 7  15:00  [seventh-day ticket group]    -> state written -> Telegram summary
+
+Catch-up behavior
+
+If the laptop is off on Day 1 and wakes on Day 3:
+Day 3 run checks all due days <= 3, creates missing Day 1 + Day 3 tickets, and skips anything already recorded.
+

@@ -1,0 +1,14 @@
+@startuml
+title Zoho OAuth Refresh Flow
+
+participant "Automation" as App
+participant "Zoho Accounts" as Accounts
+participant "Zoho Desk" as Desk
+
+App -> Accounts : POST refresh_token + client credentials
+Accounts --> App : short-lived access_token
+App -> Desk : POST /tickets with access_token
+Desk --> App : ticket id + ticket number
+
+@enduml
+

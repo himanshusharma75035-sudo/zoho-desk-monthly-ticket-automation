@@ -1,0 +1,14 @@
+.env
+tickets.config.json
+.zoho_monthly_tickets_state.json
+logs/
+output/
+tmp/
+__pycache__/
+*.py[cod]
+*.log
+.pytest_cache/
+.venv/
+venv/
+node_modules/
+

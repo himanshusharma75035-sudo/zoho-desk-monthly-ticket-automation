@@ -1,0 +1,39 @@
+direction: right
+
+Run starts: {
+  shape: oval
+}
+
+Read config: {
+  shape: document
+}
+
+Render ticket key: {
+  label: "Build state key\nYYYY-MM + ticket_key hash"
+}
+
+State check: {
+  shape: diamond
+  label: "Already created\nthis month?"
+}
+
+Skip: {
+  shape: rectangle
+  label: "Skip safely"
+}
+
+Create: {
+  shape: rectangle
+  label: "Create Zoho ticket"
+}
+
+Persist: {
+  shape: cylinder
+  label: "Write state immediately"
+}
+
+Run starts -> Read config -> Render ticket key -> State check
+State check -> Skip: yes
+State check -> Create: no
+Create -> Persist
+
