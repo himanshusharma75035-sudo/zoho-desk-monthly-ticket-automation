@@ -9,12 +9,16 @@ param(
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $Runner = Join-Path $ScriptDir "zoho_monthly_tickets.py"
 $TaskRunner = Join-Path $ScriptDir "run_zoho_monthly_tickets.ps1"
+$TaskLauncher = Join-Path $ScriptDir "run_zoho_monthly_tickets_hidden.vbs"
 
 if (-not (Test-Path -LiteralPath $Runner)) {
     throw "Runner not found: $Runner"
 }
 if (-not (Test-Path -LiteralPath $TaskRunner)) {
     throw "Task runner not found: $TaskRunner"
+}
+if (-not (Test-Path -LiteralPath $TaskLauncher)) {
+    throw "Hidden task launcher not found: $TaskLauncher"
 }
 
 $service = New-Object -ComObject Schedule.Service
@@ -63,8 +67,8 @@ Add-MonthlyTrigger -Task $task -DayOfMonth 3 -Time $ThirdDayTime
 Add-MonthlyTrigger -Task $task -DayOfMonth 7 -Time $SeventhDayTime
 
 $action = $task.Actions.Create(0)
-$action.Path = "powershell.exe"
-$action.Arguments = "-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File `"$TaskRunner`""
+$action.Path = "wscript.exe"
+$action.Arguments = "//B //Nologo `"$TaskLauncher`""
 $action.WorkingDirectory = $ScriptDir
 
 $null = $rootFolder.RegisterTaskDefinition($TaskName, $task, 6, $null, $null, 3)

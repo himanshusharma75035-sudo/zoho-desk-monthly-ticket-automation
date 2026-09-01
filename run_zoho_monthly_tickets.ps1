@@ -13,16 +13,9 @@ $Stdout = Join-Path $LogDir "zoho_monthly_tickets_$Timestamp.out.log"
 $Stderr = Join-Path $LogDir "zoho_monthly_tickets_$Timestamp.err.log"
 
 Set-Location -LiteralPath $ScriptDir
-$process = Start-Process `
-    -FilePath "python" `
-    -ArgumentList "`"$Runner`"" `
-    -WorkingDirectory $ScriptDir `
-    -NoNewWindow `
-    -Wait `
-    -PassThru `
-    -RedirectStandardOutput $Stdout `
-    -RedirectStandardError $Stderr
+& python "$Runner" > "$Stdout" 2> "$Stderr"
+$exitCode = $LASTEXITCODE
 
-if ($process.ExitCode -ne 0) {
-    throw "Zoho monthly tickets failed with exit code $($process.ExitCode). See $Stdout and $Stderr."
+if ($exitCode -ne 0) {
+    throw "Zoho monthly tickets failed with exit code $exitCode. See $Stdout and $Stderr."
 }
